@@ -1,1 +1,83 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cruz Objetiva Mobile</title>
 
+  <meta property="og:title" content="Cruz Objetiva Mobile">
+  <meta property="og:description" content="Versão mobile do sistema Cruz Objetiva">
+  <meta property="og:image" content="https://lh3.googleusercontent.com/d/1oG-lOA4xrzc5HLenMwjW2G27WaUII69q">
+
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+  <main class="app">
+    <section id="telaLogin" class="tela ativa">
+
+      <div class="topo">
+        <img 
+          class="logo"
+          src="https://lh3.googleusercontent.com/d/1oG-lOA4xrzc5HLenMwjW2G27WaUII69q"
+          alt="Cruz Objetiva"
+        >
+      </div>
+
+      <div class="card">
+        <h1>Bem-vindo(a)</h1>
+        <p>Acesse sua conta para continuar</p>
+
+        <div class="campo">
+          <span>♙</span>
+          <input id="login" type="text" placeholder="Login">
+        </div>
+
+        <div class="campo">
+          <span>🔒</span>
+          <input id="senha" type="password" placeholder="Senha">
+          <button class="btn-senha" onclick="alternarSenha()" type="button">🙈</button>
+        </div>
+
+        <button id="btnEntrar" class="btn-entrar" onclick="entrar()">
+          🛡️ Entrar
+        </button>
+
+        <div id="mensagem" class="mensagem"></div>
+
+        <div class="seguro">ACESSO SEGURO 🔒</div>
+
+        <div class="box-seguro">
+          <strong>Seus dados estão protegidos</strong>
+          <span>Utilizamos controle de acesso e boas práticas para garantir sua segurança.</span>
+        </div>
+      </div>
+
+      <footer>
+        <img src="https://lh3.googleusercontent.com/d/10PS--wpaz9jUQEvXUkFyl-Kya3Kuqe5s">
+        <div>Desenvolvido por <strong>Aurora Hash</strong> e <strong>Prof. Tiago Lima</strong></div>
+      </footer>
+
+    </section>
+
+    <section id="telaMobileDev" class="tela">
+      <div class="card aviso">
+        <img 
+          class="logo-menor"
+          src="https://lh3.googleusercontent.com/d/1oG-lOA4xrzc5HLenMwjW2G27WaUII69q"
+        >
+        <h1>Versão mobile em desenvolvimento</h1>
+        <p>
+          A experiência para celular está sendo preparada para funcionar melhor.
+        </p>
+        <p>
+          Por enquanto, acesse o Cruz Objetiva pelo computador.
+        </p>
+        <button class="btn-entrar" onclick="voltarLogin()">Voltar</button>
+      </div>
+    </section>
+  </main>
+
+  <script src="app.js"></script>
+</body>
+</html>
