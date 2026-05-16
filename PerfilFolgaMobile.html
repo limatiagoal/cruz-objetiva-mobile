@@ -3,305 +3,559 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Perfil Profissional Mobile</title>
+<title>Perfil Profissional</title>
 
 <style>
 * {
   box-sizing: border-box;
 }
 
-body {
+:root {
+  --azul-escuro: #123247;
+  --azul-texto: #29475a;
+  --cinza-texto: #657b8a;
+  --verde: #00858c;
+  --verde-claro: #e7f8f8;
+  --borda: rgba(120,140,155,0.20);
+  --sombra: 0 10px 28px rgba(0,0,0,0.10);
+  --sombra-forte: 0 16px 38px rgba(0,0,0,0.14);
+}
+
+html, body {
   margin: 0;
-  min-height: 100vh;
+  padding: 0;
+  width: 100%;
+  min-height: 100%;
   font-family: Arial, sans-serif;
   background: linear-gradient(135deg, #dfe7ec, #eef3f6, #d7e1e8);
-  color: #17384a;
+  color: var(--azul-escuro);
+}
+
+body {
+  padding: 8px;
 }
 
 .app {
   width: 100%;
-  max-width: 480px;
+  max-width: 520px;
   margin: 0 auto;
-  padding: 14px;
+  background: rgba(255,255,255,0.62);
+  border: 1px solid rgba(80,110,130,0.16);
+  border-radius: 28px;
+  padding: 12px;
+  box-shadow: var(--sombra-forte);
 }
 
 .card {
   background: rgba(255,255,255,0.94);
-  border: 1px solid rgba(80,110,130,0.18);
-  border-radius: 24px;
-  box-shadow: 0 12px 34px rgba(0,0,0,0.12);
-  padding: 18px;
-  margin-bottom: 14px;
+  border: 1px solid var(--borda);
+  border-radius: 22px;
+  padding: 14px;
+  margin-bottom: 10px;
+  box-shadow: var(--sombra);
 }
 
 .topo {
-  text-align: center;
-  padding-top: 6px;
+  display: grid;
+  grid-template-columns: 92px 1fr auto;
+  gap: 10px;
+  align-items: center;
 }
 
 .logo {
-  width: 92px;
-  margin-bottom: 4px;
+  width: 86px;
 }
 
-h1 {
-  margin: 4px 0 2px;
-  font-size: 30px;
-  color: #102f43;
-}
-
-.subtitulo {
+.titulo h1 {
   margin: 0;
-  font-size: 13px;
-  color: #607789;
+  font-size: 25px;
+  line-height: 1.05;
+  color: var(--azul-escuro);
 }
 
-.perfil {
-  text-align: center;
+.titulo p {
+  margin: 5px 0 0;
+  font-size: 12px;
+  color: var(--cinza-texto);
+}
+
+.pill-status {
+  background: #e7f7f7;
+  border: 1px solid rgba(0,133,140,0.16);
+  color: #08777c;
+  font-size: 15px;
+  font-weight: 900;
+  padding: 8px 10px;
+  border-radius: 999px;
+  white-space: nowrap;
+}
+
+.perfil-grid {
+  display: grid;
+  grid-template-columns: 132px 1fr;
+  gap: 14px;
+  align-items: stretch;
+}
+
+.foto-box {
+  border-radius: 18px;
+  overflow: hidden;
+  border: 1px solid rgba(0,133,140,0.22);
+  background: #eef6f7;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.12);
+}
+
+.foto-box img {
+  display: block;
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+}
+
+.info-perfil {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-width: 0;
 }
 
 .id {
+  font-size: 15px;
+  color: var(--verde);
   font-weight: 900;
-  color: #00858c;
-  letter-spacing: 1px;
-  font-size: 13px;
-  text-transform: uppercase;
-  margin-bottom: 12px;
-}
-
-.foto {
-  width: 142px;
-  height: 178px;
-  object-fit: cover;
-  border-radius: 18px;
-  box-shadow: 0 8px 22px rgba(0,0,0,0.22);
-  margin-bottom: 14px;
+  margin-bottom: 6px;
 }
 
 .nome {
   font-size: 21px;
+  line-height: 1.12;
+  color: var(--azul-escuro);
   font-weight: 900;
-  color: #18384f;
-  line-height: 1.25;
+  margin-bottom: 6px;
 }
 
 .funcao {
-  margin-top: 8px;
-  font-size: 15px;
-  color: #00858c;
+  color: var(--verde);
   font-weight: 900;
+  font-size: 14px;
+  margin-bottom: 2px;
 }
 
 .especialidade {
-  font-size: 14px;
-  color: #4f6574;
-  font-weight: bold;
+  color: var(--cinza-texto);
+  font-size: 13px;
+  font-weight: 700;
+  padding-bottom: 10px;
+  border-bottom: 1px solid rgba(120,140,155,0.18);
 }
 
-.status-grid {
+.status-setor {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 10px;
-  margin-top: 16px;
-  border-top: 1px solid rgba(120,140,155,0.22);
-  padding-top: 14px;
+  gap: 8px;
+  margin-top: 10px;
 }
 
-.info-box {
-  background: rgba(240,247,249,0.85);
+.mini-info {
+  background: rgba(248,251,252,0.9);
+  border: 1px solid var(--borda);
   border-radius: 16px;
-  padding: 10px;
-  font-size: 13px;
+  padding: 9px 8px;
+  text-align: center;
 }
 
-.info-box strong {
+.mini-info small {
   display: block;
-  color: #6a7f8f;
-  margin-bottom: 4px;
-}
-
-.info-box span {
+  color: var(--cinza-texto);
   font-weight: 900;
-  color: #17384a;
+  font-size: 11px;
+  margin-bottom: 3px;
 }
 
-.acoes {
+.mini-info strong {
+  font-size: 13px;
+  color: var(--azul-escuro);
+}
+
+.acoes-grid {
   display: grid;
-  gap: 12px;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
 }
 
-.btn {
-  width: 100%;
+.btn-acao {
+  min-height: 86px;
   border: none;
   border-radius: 16px;
-  padding: 16px;
-  font-size: 19px;
-  font-weight: 900;
+  padding: 8px 6px;
+  background: linear-gradient(135deg, #0fa1a5, #07677b);
   color: white;
+  font-weight: 900;
+  font-size: 13px;
   cursor: pointer;
-  background: linear-gradient(135deg, #11a3a9, #0b6178);
   box-shadow: 0 8px 18px rgba(31,95,115,0.28);
-  transition: all 0.15s ease;
+  transition: transform .15s ease, box-shadow .15s ease, filter .15s ease;
 }
 
-.btn:hover {
+.btn-acao span {
+  display: block;
+  font-size: 27px;
+  margin-bottom: 7px;
+}
+
+.btn-acao.verde {
+  background: linear-gradient(135deg, #61d798, #17ad65);
+}
+
+.btn-acao:hover {
   transform: translateY(-2px);
   filter: brightness(1.08);
 }
 
-.btn:active {
-  transform: scale(0.97);
-}
-
-.btn.verde {
-  background: linear-gradient(135deg, #66d99a, #18ad66);
+.btn-acao:active {
+  transform: scale(0.96);
 }
 
 .aviso {
-  background: #e9f7fa;
-  border: 1px solid rgba(80,150,170,0.22);
-  color: #426678;
-  font-size: 13px;
-  line-height: 1.45;
-  border-radius: 18px;
-  padding: 14px;
-}
-
-.aviso strong {
-  display: block;
-  color: #08777c;
-  margin-bottom: 4px;
-}
-
-.grid-atributos {
+  margin-top: 10px;
+  border-radius: 16px;
+  padding: 10px 12px;
+  background: #e9f8fa;
+  border: 1px solid rgba(0,133,140,0.16);
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 12px;
-}
-
-.atributo {
-  text-align: center;
-  background: #fff;
-  border: 1px solid rgba(120,140,155,0.20);
-  border-radius: 18px;
-  padding: 14px 8px;
-}
-
-.icone {
-  font-size: 28px;
-}
-
-.label {
-  font-size: 13px;
-  font-weight: 900;
-  color: #607789;
-  margin: 8px 0;
-}
-
-.valor {
-  display: inline-flex;
+  grid-template-columns: 42px 1fr;
   align-items: center;
-  justify-content: center;
-  min-width: 48px;
-  height: 44px;
-  border-radius: 14px;
-  background: #e2f3f4;
-  color: #00858c;
-  font-size: 28px;
-  font-weight: 900;
-}
-
-.resumo {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
   gap: 10px;
 }
 
-.resumo-item {
-  background: #fff;
-  border-radius: 16px;
-  border: 1px solid rgba(120,140,155,0.20);
-  padding: 12px;
-  text-align: center;
+.aviso-icone {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  background: #08777c;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.18);
 }
 
-.resumo-item small {
-  display: block;
-  color: #607789;
-  font-weight: 900;
-  font-size: 12px;
+.aviso strong {
+  color: #08777c;
+  font-size: 14px;
 }
 
-.resumo-item strong {
-  font-size: 25px;
-  color: #17384a;
+.aviso p {
+  margin: 3px 0 0;
+  color: var(--azul-texto);
+  font-size: 12.5px;
+  line-height: 1.35;
 }
 
 .titulo-secao {
-  font-size: 18px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--verde);
+  font-size: 21px;
   font-weight: 900;
-  color: #00858c;
   margin-bottom: 12px;
+}
+
+.titulo-secao span {
+  font-size: 22px;
+}
+
+.atributos-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 8px;
+}
+
+.atributo {
+  border: 1px solid var(--borda);
+  border-radius: 16px;
+  background: #fff;
+  padding: 10px 4px;
+  text-align: center;
+  min-width: 0;
+}
+
+.atributo .icone {
+  font-size: 24px;
+  height: 28px;
+}
+
+.atributo .label {
+  color: var(--cinza-texto);
+  font-size: 11.5px;
+  font-weight: 900;
+  margin: 7px 0;
+}
+
+.atributo .valor {
+  display: inline-flex;
+  min-width: 38px;
+  height: 34px;
+  align-items: center;
+  justify-content: center;
+  border-radius: 12px;
+  background: #ddf3f4;
+  color: var(--verde);
+  font-weight: 900;
+  font-size: 23px;
+}
+
+.progressao-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 8px;
+}
+
+.progresso {
+  border: 1px solid var(--borda);
+  border-radius: 15px;
+  background: #fff;
+  padding: 9px 4px;
+  text-align: center;
+  min-width: 0;
+}
+
+.progresso small {
+  display: block;
+  font-size: 10.8px;
+  color: var(--cinza-texto);
+  font-weight: 900;
+  min-height: 25px;
+}
+
+.progresso strong {
+  display: block;
+  font-size: 25px;
+  color: var(--azul-escuro);
+  line-height: 1;
+}
+
+.medalhas-row {
+  display: grid;
+  grid-template-columns: 1fr auto auto auto;
+  gap: 10px;
+  align-items: center;
 }
 
 .medalhas {
   display: flex;
-  gap: 10px;
+  gap: 8px;
 }
 
 .medalha {
-  width: 52px;
-  height: 52px;
-  border-radius: 16px;
-  border: 1px dashed #9bb9c3;
-  background: #f7fbfc;
+  width: 54px;
+  height: 44px;
+  border-radius: 14px;
+  border: 1px dashed rgba(0,100,120,0.38);
+  background: #fbffff;
   display: flex;
   align-items: center;
   justify-content: center;
   font-size: 26px;
 }
 
-.xp-card {
-  background: #f7fbfc;
-  border: 1px solid rgba(120,140,155,0.18);
+.xp-lista {
+  border: 1px solid var(--borda);
   border-radius: 16px;
-  padding: 12px;
-  margin-bottom: 10px;
+  overflow: hidden;
+  background: #fff;
 }
 
-.xp-topo {
-  display: flex;
-  justify-content: space-between;
+.xp-item {
+  display: grid;
+  grid-template-columns: 78px 1fr 48px;
   gap: 10px;
-  font-size: 13px;
-  font-weight: 900;
-  color: #607789;
-  margin-bottom: 8px;
+  padding: 11px 10px;
+  border-bottom: 1px solid rgba(120,140,155,0.16);
+  align-items: center;
 }
 
-.xp-desc {
+.xp-item:last-child {
+  border-bottom: none;
+}
+
+.xp-data {
+  font-size: 12px;
+  line-height: 1.3;
+  color: var(--azul-texto);
+  font-weight: 900;
+}
+
+.xp-texto strong {
+  display: block;
+  color: var(--azul-escuro);
   font-size: 13px;
-  line-height: 1.4;
-  color: #294253;
+  margin-bottom: 3px;
+}
+
+.xp-texto p {
+  margin: 0;
+  color: var(--azul-texto);
+  font-size: 12px;
+  line-height: 1.25;
 }
 
 .xp-valor {
-  font-size: 22px;
+  text-align: center;
+  color: var(--verde);
+  font-size: 20px;
   font-weight: 900;
-  color: #00858c;
 }
 
-.sair {
+.xp-valor.negativo {
+  color: #d40000;
+}
+
+.ver-mais {
+  text-align: center;
+  color: var(--verde);
+  font-size: 13px;
+  font-weight: 900;
+  margin-top: 10px;
+}
+
+.btn-sair {
+  width: 100%;
+  border: 1px solid rgba(120,140,155,0.28);
   background: linear-gradient(180deg, #f8fafb, #e7edf1);
   color: #2b4154;
-  border: 1px solid rgba(120,140,155,0.28);
+  border-radius: 18px;
+  padding: 14px;
+  font-size: 18px;
+  font-weight: 900;
+  cursor: pointer;
+  box-shadow: var(--sombra);
+}
+
+.rodape-creditos {
+  margin: 12px 0 2px;
+  text-align: center;
+  font-size: 12px;
+  color: #5c7080;
+}
+
+.linha-pulso {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+
+.linha-pulso::before,
+.linha-pulso::after {
+  content: "";
+  width: 70px;
+  height: 1px;
+  background: rgba(0,133,140,0.45);
+}
+
+.pulso {
+  color: var(--verde);
+  font-size: 18px;
+}
+
+.rodape-creditos strong {
+  color: var(--verde);
 }
 
 .carregando {
   text-align: center;
-  padding: 20px;
-  color: #607789;
-  font-weight: bold;
+  color: var(--cinza-texto);
+  font-weight: 900;
+  padding: 22px 10px;
+  font-size: 15px;
+}
+
+@media (max-width: 420px) {
+  body {
+    padding: 4px;
+  }
+
+  .app {
+    padding: 8px;
+    border-radius: 22px;
+  }
+
+  .card {
+    padding: 12px;
+    border-radius: 20px;
+  }
+
+  .topo {
+    grid-template-columns: 74px 1fr auto;
+    gap: 7px;
+  }
+
+  .logo {
+    width: 72px;
+  }
+
+  .titulo h1 {
+    font-size: 21px;
+  }
+
+  .titulo p {
+    font-size: 11px;
+  }
+
+  .pill-status {
+    font-size: 13px;
+    padding: 7px 8px;
+  }
+
+  .perfil-grid {
+    grid-template-columns: 118px 1fr;
+    gap: 11px;
+  }
+
+  .foto-box img {
+    height: 160px;
+  }
+
+  .nome {
+    font-size: 18px;
+  }
+
+  .acoes-grid {
+    gap: 7px;
+  }
+
+  .btn-acao {
+    min-height: 76px;
+    font-size: 11px;
+    border-radius: 14px;
+  }
+
+  .btn-acao span {
+    font-size: 24px;
+  }
+
+  .atributos-grid,
+  .progressao-grid {
+    gap: 6px;
+  }
+
+  .atributo .label,
+  .progresso small {
+    font-size: 10px;
+  }
+
+  .xp-item {
+    grid-template-columns: 68px 1fr 42px;
+    gap: 7px;
+  }
+
+  .xp-data,
+  .xp-texto p {
+    font-size: 11px;
+  }
 }
 </style>
 </head>
@@ -311,52 +565,81 @@ h1 {
 <div class="app">
 
   <div class="card topo">
-    <img class="logo" src="https://lh3.googleusercontent.com/d/1iaOvysMHBzimz4sVfGqlVvOX5vO2fVKC">
-    <h1>Perfil Profissional</h1>
-    <p class="subtitulo">Resumo médico, atributos, XP e condecorações.</p>
-  </div>
+    <img class="logo" src="https://lh3.googleusercontent.com/d/1iaOvysMHBzimz4sVfGqlVvOX5vO2fVKC" alt="Cruz Objetiva">
 
-  <div class="card perfil">
-    <div class="id" id="perfilId">ID: ---</div>
-
-    <img 
-      id="perfilFoto" 
-      class="foto" 
-      src="https://lh3.googleusercontent.com/d/1jQvrAFm9A3WapSkRDx4o5gPiRnmhKPYP"
-    >
-
-    <div class="nome" id="perfilNome">---</div>
-    <div class="funcao" id="perfilFuncao">---</div>
-    <div class="especialidade" id="perfilEspecialidade">---</div>
-
-    <div class="status-grid">
-      <div class="info-box">
-        <strong>Status</strong>
-        <span id="perfilStatus">😎 Folga</span>
-      </div>
-      <div class="info-box">
-        <strong>Setor</strong>
-        <span id="perfilSetor">Sem setor</span>
-      </div>
+    <div class="titulo">
+      <h1>Perfil Profissional</h1>
+      <p>Resumo médico, atributos, XP e condecorações.</p>
     </div>
+
+    <div class="pill-status" id="pillStatus">😎 Folga</div>
   </div>
 
-  <div class="card acoes">
-    <button class="btn" onclick="abrirTriagem()">🩺 Triagem</button>
-    <button class="btn" onclick="abrirTriagemGeral()">🏥 Triagem Geral</button>
-    <button class="btn" onclick="abrirCriarNPC()">🧑‍⚕️ Criar NPC</button>
-    <button class="btn verde" onclick="abrirEstudos()">📖 Estudos</button>
+  <div class="card">
+    <div class="perfil-grid">
+      <div class="foto-box">
+        <img id="perfilFoto" src="https://lh3.googleusercontent.com/d/1jQvrAFm9A3WapSkRDx4o5gPiRnmhKPYP" alt="Foto do profissional">
+      </div>
 
-    <div class="aviso">
-      <strong>Modo folga ativo</strong>
-      Você pode estudar, revisar seu XP ou criar NPCs para enriquecer o hospital.
+      <div class="info-perfil">
+        <div>
+          <div class="id" id="perfilId">ID: ---</div>
+          <div class="nome" id="perfilNome">---</div>
+          <div class="funcao" id="perfilFuncao">---</div>
+          <div class="especialidade" id="perfilEspecialidade">---</div>
+        </div>
+
+        <div class="status-setor">
+          <div class="mini-info">
+            <small>Status</small>
+            <strong id="perfilStatus">😎 Folga</strong>
+          </div>
+
+          <div class="mini-info">
+            <small>Setor</small>
+            <strong id="perfilSetor">Sem setor</strong>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 
   <div class="card">
-    <div class="titulo-secao">Atributos</div>
+    <div class="acoes-grid">
+      <button class="btn-acao" onclick="abrirTriagem()">
+        <span>🩺</span>
+        Triagem
+      </button>
 
-    <div class="grid-atributos">
+      <button class="btn-acao" onclick="abrirTriagemGeral()">
+        <span>🏥</span>
+        Triagem Geral
+      </button>
+
+      <button class="btn-acao" onclick="abrirCriarNPC()">
+        <span>🧑‍⚕️</span>
+        Criar NPC
+      </button>
+
+      <button class="btn-acao verde" onclick="abrirEstudos()">
+        <span>📖</span>
+        Estudos
+      </button>
+    </div>
+
+    <div class="aviso">
+      <div class="aviso-icone">★</div>
+      <div>
+        <strong>Modo folga ativo</strong>
+        <p>Você pode estudar, revisar seu XP ou criar NPCs para enriquecer o hospital.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="titulo-secao"><span>⌁</span> Atributos</div>
+
+    <div class="atributos-grid">
       <div class="atributo">
         <div class="icone">🏃</div>
         <div class="label">Agilidade</div>
@@ -384,25 +667,25 @@ h1 {
   </div>
 
   <div class="card">
-    <div class="titulo-secao">Progressão</div>
+    <div class="titulo-secao"><span>📈</span> Progressão</div>
 
-    <div class="resumo">
-      <div class="resumo-item">
+    <div class="progressao-grid">
+      <div class="progresso">
         <small>Idade no jogo</small>
         <strong id="idadeJogo">0</strong>
       </div>
 
-      <div class="resumo-item">
+      <div class="progresso">
         <small>Nível</small>
         <strong id="nivel">1</strong>
       </div>
 
-      <div class="resumo-item">
+      <div class="progresso">
         <small>XP Atual</small>
         <strong id="xp">0</strong>
       </div>
 
-      <div class="resumo-item">
+      <div class="progresso">
         <small>Total de pontos</small>
         <strong id="totalPontos">0</strong>
       </div>
@@ -410,21 +693,31 @@ h1 {
   </div>
 
   <div class="card">
-    <div class="titulo-secao">🏅 Condecorações</div>
+    <div class="medalhas-row">
+      <div class="titulo-secao" style="margin:0;"><span>🏅</span> Condecorações</div>
 
-    <div class="medalhas">
-      <div class="medalha">🏅</div>
-      <div class="medalha">🎖️</div>
-      <div class="medalha">⭐</div>
+      <div class="medalhas">
+        <div class="medalha">🏅</div>
+        <div class="medalha">🎖️</div>
+        <div class="medalha">⭐</div>
+      </div>
     </div>
   </div>
 
   <div class="card">
-    <div class="titulo-secao">📊 Contabilidade de XP</div>
+    <div class="titulo-secao"><span>📊</span> Contabilidade de XP</div>
     <div id="historicoXP" class="carregando">Carregando histórico...</div>
   </div>
 
-  <button class="btn sair" onclick="sairSistema()">Sair</button>
+  <button class="btn-sair" onclick="sairSistema()">↪ Sair do sistema</button>
+
+  <div class="rodape-creditos">
+    <div class="linha-pulso">
+      <span class="pulso">⌁</span>
+      <span>Desenvolvido por <strong>Aurora Hash</strong> e <strong>Prof. Tiago Lima</strong></span>
+      <span class="pulso">⌁</span>
+    </div>
+  </div>
 
 </div>
 
@@ -435,7 +728,27 @@ function carregarPerfil() {
   const login = sessionStorage.getItem("usuarioLogin");
 
   if (!login) {
-    alert("Login não encontrado. Faça login novamente.");
+    preencherPerfil({
+      sucesso: true,
+      perfil: {
+        id: "---",
+        nome: "---",
+        funcao: "---",
+        especialidade: "---",
+        status: "😎 Folga",
+        setor: "Sem setor",
+        foto: "https://lh3.googleusercontent.com/d/1jQvrAFm9A3WapSkRDx4o5gPiRnmhKPYP",
+        agilidade: 0,
+        experiencia: 0,
+        inteligencia: 0,
+        paciencia: 0,
+        idadeJogo: 0,
+        nivel: 1,
+        xp: 0,
+        totalPontos: 0,
+        historicoXP: []
+      }
+    });
     return;
   }
 
@@ -456,50 +769,31 @@ function preencherPerfil(resposta) {
 
   const p = resposta.perfil || {};
 
-  document.getElementById("perfilId").innerText =
-    "ID: " + (p.id || "---");
+  const status = p.status || "😎 Folga";
+  const setor = p.setor || "Sem setor";
+
+  document.getElementById("perfilId").innerText = "ID: " + (p.id || "---");
 
   document.getElementById("perfilFoto").src =
     p.foto || "https://lh3.googleusercontent.com/d/1jQvrAFm9A3WapSkRDx4o5gPiRnmhKPYP";
 
-  document.getElementById("perfilNome").innerText =
-    p.nome || "---";
+  document.getElementById("perfilNome").innerText = p.nome || "---";
+  document.getElementById("perfilFuncao").innerText = p.funcao || "---";
+  document.getElementById("perfilEspecialidade").innerText = p.especialidade || "---";
 
-  document.getElementById("perfilFuncao").innerText =
-    p.funcao || "---";
+  document.getElementById("perfilStatus").innerText = status;
+  document.getElementById("perfilSetor").innerText = setor;
+  document.getElementById("pillStatus").innerText = status;
 
-  document.getElementById("perfilEspecialidade").innerText =
-    p.especialidade || "---";
+  document.getElementById("agilidade").innerText = p.agilidade ?? 0;
+  document.getElementById("experiencia").innerText = p.experiencia ?? 0;
+  document.getElementById("inteligencia").innerText = p.inteligencia ?? 0;
+  document.getElementById("paciencia").innerText = p.paciencia ?? 0;
 
-  document.getElementById("perfilStatus").innerText =
-    p.status || "😎 Folga";
-
-  document.getElementById("perfilSetor").innerText =
-    p.setor || "Sem setor";
-
-  document.getElementById("agilidade").innerText =
-    p.agilidade ?? 0;
-
-  document.getElementById("experiencia").innerText =
-    p.experiencia ?? 0;
-
-  document.getElementById("inteligencia").innerText =
-    p.inteligencia ?? 0;
-
-  document.getElementById("paciencia").innerText =
-    p.paciencia ?? 0;
-
-  document.getElementById("idadeJogo").innerText =
-    p.idadeJogo || 0;
-
-  document.getElementById("nivel").innerText =
-    p.nivel || 1;
-
-  document.getElementById("xp").innerText =
-    p.xp ?? 0;
-
-  document.getElementById("totalPontos").innerText =
-    p.totalPontos ?? 0;
+  document.getElementById("idadeJogo").innerText = p.idadeJogo || 0;
+  document.getElementById("nivel").innerText = p.nivel || 1;
+  document.getElementById("xp").innerText = p.xp ?? 0;
+  document.getElementById("totalPontos").innerText = p.totalPontos ?? 0;
 
   montarHistoricoXP(p.historicoXP || []);
 }
@@ -510,30 +804,71 @@ function montarHistoricoXP(historico) {
 
   if (!historico.length) {
     container.innerHTML = `
-      <div class="xp-card">
-        <div class="xp-desc">Nenhum lançamento de XP encontrado.</div>
+      <div class="xp-lista">
+        <div class="xp-item" style="grid-template-columns:1fr;">
+          <div class="xp-texto">
+            <strong>Nenhum lançamento encontrado</strong>
+            <p>Quando houver ganho ou perda de XP, o histórico aparecerá aqui.</p>
+          </div>
+        </div>
       </div>
     `;
     return;
   }
 
-  historico.forEach(item => {
+  const lista = document.createElement("div");
+  lista.className = "xp-lista";
+
+  historico.slice(0, 3).forEach(item => {
+    const xpTexto = String(item.xp ?? "0");
+    const negativo = xpTexto.includes("-") || Number(item.xp) < 0;
+
     const div = document.createElement("div");
-    div.className = "xp-card";
+    div.className = "xp-item";
 
     div.innerHTML = `
-      <div class="xp-topo">
-        <span>${item.data || ""}</span>
-        <span class="xp-valor">${item.xp || 0}</span>
+      <div class="xp-data">${formatarDataXP(item.data || "")}</div>
+
+      <div class="xp-texto">
+        <strong>${item.categoria || "Registro de XP"}</strong>
+        <p>${item.observacao || ""}</p>
       </div>
-      <div class="xp-desc">
-        <strong>${item.categoria || ""}</strong><br>
-        ${item.observacao || ""}
+
+      <div class="xp-valor ${negativo ? "negativo" : ""}">
+        XP<br>${formatarXP(item.xp)}
       </div>
     `;
 
-    container.appendChild(div);
+    lista.appendChild(div);
   });
+
+  container.appendChild(lista);
+
+  if (historico.length > 3) {
+    const mais = document.createElement("div");
+    mais.className = "ver-mais";
+    mais.innerText = "Ver mais histórico ↓";
+    container.appendChild(mais);
+  }
+}
+
+function formatarXP(valor) {
+  const num = Number(valor);
+  if (isNaN(num)) return valor || "0";
+  return num > 0 ? "+" + num : String(num);
+}
+
+function formatarDataXP(valor) {
+  if (!valor) return "---";
+
+  const txt = String(valor).trim();
+
+  if (txt.includes(" ")) {
+    const partes = txt.split(" ");
+    return partes[0] + "<br>" + partes.slice(1).join(" ");
+  }
+
+  return txt;
 }
 
 function abrirTriagem() {
