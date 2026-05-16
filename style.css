@@ -1,1 +1,270 @@
+* {
+  box-sizing: border-box;
+}
 
+html, body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  min-height: 100%;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  background:
+    linear-gradient(rgba(232,248,252,0.10), rgba(220,244,248,0.46)),
+    url("https://lh3.googleusercontent.com/d/1wVIjHbOEPwCz84KewvufNnpHj_2zGbXe");
+  background-size: cover;
+  background-position: center top;
+  color: #06384d;
+}
+
+.app {
+  width: 100%;
+  min-height: 100vh;
+  min-height: 100dvh;
+}
+
+.tela {
+  display: none;
+  width: 100%;
+  min-height: 100vh;
+  min-height: 100dvh;
+  padding: 28px 22px 18px;
+}
+
+.tela.ativa {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.topo {
+  text-align: center;
+  padding-top: 10px;
+}
+
+.logo {
+  width: 245px;
+  max-width: 72vw;
+  filter: drop-shadow(0 8px 18px rgba(0,80,90,0.16));
+}
+
+.logo-menor {
+  width: 210px;
+  max-width: 80%;
+}
+
+.card {
+  width: 100%;
+  max-width: 430px;
+  margin: 0 auto;
+  background: rgba(255,255,255,0.93);
+  border-radius: 34px;
+  padding: 32px 24px 28px;
+  box-shadow: 0 24px 60px rgba(40,80,100,0.20);
+  border: 1px solid rgba(100,130,145,0.20);
+  backdrop-filter: blur(8px);
+  text-align: center;
+}
+
+h1 {
+  margin: 0 0 8px;
+  font-size: 36px;
+  font-weight: 900;
+  color: #06384d;
+}
+
+p {
+  margin: 0 0 28px;
+  font-size: 18px;
+  color: #607386;
+}
+
+.campo {
+  position: relative;
+  margin-bottom: 18px;
+}
+
+.campo span {
+  position: absolute;
+  left: 22px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 26px;
+}
+
+input {
+  width: 100%;
+  height: 64px;
+  border-radius: 21px;
+  border: 1px solid rgba(95,120,135,0.35);
+  padding: 0 64px;
+  font-size: 20px;
+  outline: none;
+  color: #18384c;
+}
+
+input:focus {
+  border-color: rgba(0,155,170,0.60);
+  box-shadow: 0 0 0 4px rgba(0,155,170,0.10);
+}
+
+.btn-senha {
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 48px;
+  height: 48px;
+  border: none;
+  background: transparent;
+  font-size: 24px;
+  cursor: pointer;
+}
+
+.btn-entrar {
+  width: 100%;
+  height: 68px;
+  margin-top: 14px;
+  border: none;
+  border-radius: 22px;
+  background: linear-gradient(135deg, #00687f, #00aaa6);
+  color: white;
+  font-size: 25px;
+  font-weight: 900;
+  cursor: pointer;
+  box-shadow: 0 16px 30px rgba(0,105,125,0.30);
+  transition: transform 0.14s ease, filter 0.14s ease;
+}
+
+.btn-entrar:active {
+  transform: scale(0.97);
+}
+
+.btn-entrar:disabled {
+  opacity: 0.7;
+  cursor: wait;
+}
+
+.mensagem {
+  min-height: 22px;
+  margin-top: 14px;
+  color: #9b2f2f;
+  font-weight: bold;
+  font-size: 14px;
+}
+
+.seguro {
+  margin: 26px 0 20px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  color: #00657b;
+  font-weight: 900;
+  letter-spacing: 1px;
+  font-size: 14px;
+}
+
+.seguro::before,
+.seguro::after {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background: rgba(80,130,145,0.35);
+}
+
+.box-seguro {
+  background: rgba(225,248,250,0.66);
+  border: 1px solid rgba(0,155,170,0.22);
+  border-radius: 22px;
+  padding: 18px;
+  text-align: left;
+}
+
+.box-seguro strong {
+  display: block;
+  color: #006078;
+  font-size: 17px;
+  margin-bottom: 6px;
+}
+
+.box-seguro span {
+  color: #536879;
+  font-size: 14px;
+  line-height: 1.4;
+}
+
+footer {
+  text-align: center;
+  color: #174c5e;
+  font-size: 14px;
+  padding-bottom: 8px;
+}
+
+footer img {
+  width: 100%;
+  max-width: 380px;
+  height: 58px;
+  object-fit: contain;
+  margin-bottom: 6px;
+}
+
+footer strong {
+  color: #00657b;
+}
+
+.aviso {
+  margin: auto;
+}
+
+.aviso h1 {
+  font-size: 28px;
+}
+
+.aviso p {
+  margin-bottom: 14px;
+  line-height: 1.5;
+}
+
+@media (max-width: 380px) {
+  .tela {
+    padding: 18px 16px 14px;
+  }
+
+  .logo {
+    width: 210px;
+  }
+
+  .card {
+    border-radius: 30px;
+    padding: 26px 20px 22px;
+  }
+
+  h1 {
+    font-size: 31px;
+  }
+
+  p {
+    font-size: 16px;
+    margin-bottom: 22px;
+  }
+
+  input {
+    height: 58px;
+    font-size: 18px;
+  }
+
+  .btn-entrar {
+    height: 62px;
+    font-size: 22px;
+  }
+
+  footer {
+    font-size: 12px;
+  }
+
+  footer img {
+    height: 44px;
+  }
+}
