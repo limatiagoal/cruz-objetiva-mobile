@@ -1,4 +1,4 @@
-const LINK_APPS_SCRIPT = "COLE_AQUI_O_LINK_DO_WEB_APP_ATUAL";
+const LINK_APPS_SCRIPT = "chrome-extension://noogafoofpebimajpfpamcfhoaifemoa/suspended.html#ttl=script.google.com%2Fmacros%2Fs%2FAKfycbxD1AvwAMmBxOX3lTsTlY78MBtqsOMw6_xjmTemQHE%2Fdev&pos=0&uri=https://script.google.com/macros/s/AKfycbxD1AvwAMmBxOX3lTsTlY78MBtqsOMw6_xjmTemQHE/dev";
 
 function ehCelular() {
   return /Android|iPhone|iPad|iPod|Opera Mini|IEMobile/i.test(navigator.userAgent)
