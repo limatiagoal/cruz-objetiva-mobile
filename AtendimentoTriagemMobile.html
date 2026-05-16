@@ -1,0 +1,615 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Atendimento de Triagem</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    html, body {
+      margin: 0;
+      padding: 0;
+      width: 100%;
+      min-height: 100vh;
+      font-family: Arial, sans-serif;
+      background: linear-gradient(135deg, #dfe7ec, #eef3f6, #d7e1e8);
+      color: #17384a;
+      overflow-x: hidden;
+    }
+
+    body {
+      padding: 14px;
+      padding-bottom: 96px;
+    }
+
+    .painel-atendimento {
+      width: 100%;
+      max-width: 520px;
+      margin: 0 auto;
+      background: rgba(255,255,255,0.94);
+      border: 1px solid rgba(120,140,155,0.22);
+      border-radius: 24px;
+      padding: 18px 14px 20px;
+      box-shadow: 0 18px 45px rgba(0,0,0,0.12);
+    }
+
+    .topo {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 20px;
+    }
+
+    .logo {
+      width: 118px;
+      height: auto;
+    }
+
+    .usuario-logado {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(255,255,255,0.86);
+      border: 1px solid rgba(80,110,130,0.22);
+      border-radius: 999px;
+      padding: 6px 10px 6px 6px;
+      box-shadow: 0 8px 18px rgba(0,0,0,0.10);
+      max-width: 185px;
+    }
+
+    .usuario-logado img {
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      object-fit: cover;
+      background: #ddd;
+      flex-shrink: 0;
+    }
+
+    .usuario-logado div {
+      min-width: 0;
+    }
+
+    #usuarioNome {
+      font-size: 13px;
+      font-weight: bold;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .usuario-logado small {
+      display: block;
+      color: #5c7080;
+      font-size: 11px;
+    }
+
+    .voltar {
+      text-align: center;
+      font-size: 14px;
+      font-weight: bold;
+      color: #08777c;
+      cursor: pointer;
+      margin: 2px 0 12px;
+    }
+
+    h1 {
+      text-align: center;
+      font-size: 30px;
+      line-height: 1.05;
+      margin: 0;
+      color: #1d3850;
+    }
+
+    .subtitulo {
+      text-align: center;
+      font-size: 15px;
+      color: #6a7f8f;
+      margin: 8px 0 22px;
+    }
+
+    .card {
+      background: rgba(248,251,252,0.96);
+      border: 1px solid rgba(120,140,155,0.24);
+      border-radius: 18px;
+      padding: 16px;
+      margin-bottom: 14px;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.045);
+    }
+
+    .paciente {
+      display: grid;
+      grid-template-columns: 86px 1fr;
+      gap: 14px;
+      align-items: center;
+    }
+
+    .foto-paciente {
+      width: 86px;
+      height: 86px;
+      border-radius: 16px;
+      object-fit: cover;
+      background: #ccc;
+    }
+
+    .nome-paciente {
+      font-size: 18px;
+      font-weight: bold;
+      color: #1d3850;
+      margin-bottom: 10px;
+      line-height: 1.2;
+    }
+
+    .paciente-info-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 6px 12px;
+      font-size: 13px;
+      color: #41586a;
+    }
+
+    .paciente-info-grid strong {
+      color: #1d3850;
+    }
+
+    .titulo-card {
+      font-size: 18px;
+      font-weight: bold;
+      margin-bottom: 12px;
+      color: #08777c;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .classificacao-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 10px;
+    }
+
+    .classificacao-grid .risco:last-child {
+      grid-column: span 2;
+    }
+
+    .risco {
+      border: 1px solid rgba(120,140,155,0.35);
+      border-radius: 12px;
+      padding: 13px 8px;
+      font-weight: bold;
+      cursor: pointer;
+      background: white;
+      text-align: center;
+      transition: 0.15s ease;
+    }
+
+    .risco:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 18px rgba(0,0,0,0.10);
+    }
+
+    .risco:active {
+      transform: scale(0.96);
+    }
+
+    .azul { color: #2276b8; }
+    .verde { color: #29944a; }
+    .amarelo { color: #c99000; }
+    .laranja { color: #d96f00; }
+    .vermelho { color: #b82b2b; }
+
+    .caixa-texto {
+      min-height: 74px;
+      background: white;
+      border: 1px solid rgba(120,140,155,0.28);
+      border-radius: 12px;
+      padding: 13px;
+      font-size: 15px;
+      color: #23384a;
+      line-height: 1.45;
+      overflow-wrap: break-word;
+      white-space: pre-wrap;
+    }
+
+    #queixaPrincipal {
+      min-height: auto;
+    }
+
+    .chat-npc {
+      min-height: 110px;
+      max-height: 210px;
+      overflow-y: auto;
+    }
+
+    textarea {
+      width: 100%;
+      border-radius: 12px;
+      border: 1px solid rgba(120,140,155,0.28);
+      padding: 13px;
+      resize: vertical;
+      font-size: 15px;
+      font-family: Arial, sans-serif;
+      background: white;
+      color: #23384a;
+    }
+
+    #perguntaNPC {
+      min-height: 74px;
+      margin-top: 10px;
+    }
+
+    #anotacoesTriagem {
+      min-height: 130px;
+    }
+
+    .btn-revelar,
+    .btn-principal {
+      width: 100%;
+      margin-top: 12px;
+      padding: 14px;
+      border: none;
+      border-radius: 12px;
+      background: linear-gradient(135deg, #2d8a84, #1f5f73);
+      color: white;
+      font-size: 15px;
+      font-weight: bold;
+      cursor: pointer;
+      box-shadow: 0 8px 18px rgba(31,95,115,0.24);
+      transition: 0.15s ease;
+    }
+
+    .btn-revelar:hover,
+    .btn-principal:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 12px 22px rgba(31,95,115,0.30);
+    }
+
+    .btn-revelar:active,
+    .btn-principal:active {
+      transform: scale(0.97);
+    }
+
+    .btn-principal:disabled {
+      opacity: 0.45;
+      cursor: not-allowed;
+      box-shadow: none;
+      transform: none;
+    }
+
+    .campo-oculto {
+      background: #edf3f6;
+      border: 1px dashed #aab8c2;
+      border-radius: 12px;
+      padding: 14px;
+      color: #6a7f8f;
+      text-align: center;
+      font-weight: bold;
+      font-size: 14px;
+    }
+
+    .exames-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+    }
+
+    .btn-exame {
+      padding: 12px 8px;
+      border-radius: 12px;
+      border: 1px solid rgba(120,140,155,0.32);
+      background: white;
+      font-weight: bold;
+      color: #1d3850;
+      cursor: pointer;
+      transition: 0.15s ease;
+    }
+
+    .btn-exame:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 16px rgba(0,0,0,0.08);
+    }
+
+    .btn-exame:active {
+      transform: scale(0.96);
+    }
+
+    .contador {
+      margin-top: 10px;
+      font-weight: bold;
+      color: #6a7f8f;
+      text-align: center;
+      font-size: 13px;
+    }
+
+    details.card {
+      padding: 0;
+      overflow: hidden;
+    }
+
+    details summary {
+      list-style: none;
+      cursor: pointer;
+      padding: 16px;
+      font-size: 18px;
+      font-weight: bold;
+      color: #08777c;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    details summary::-webkit-details-marker {
+      display: none;
+    }
+
+    details summary::after {
+      content: "⌄";
+      font-size: 22px;
+      color: #1d3850;
+      transition: 0.15s ease;
+    }
+
+    details[open] summary::after {
+      transform: rotate(180deg);
+    }
+
+    .details-conteudo {
+      padding: 0 16px 16px;
+    }
+
+    .sinais-vitais {
+      margin-bottom: 0;
+    }
+
+    .rodape-acoes {
+      position: fixed;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      z-index: 20;
+      display: grid;
+      grid-template-columns: 1fr 1.2fr;
+      gap: 10px;
+      padding: 12px 14px;
+      background: rgba(235,243,247,0.94);
+      border-top: 1px solid rgba(120,140,155,0.25);
+      backdrop-filter: blur(8px);
+    }
+
+    .btn-secundario {
+      width: 100%;
+      padding: 14px;
+      border-radius: 12px;
+      font-size: 15px;
+      font-weight: bold;
+      cursor: pointer;
+      background: #f4f8fa;
+      color: #2b4154;
+      border: 1px solid rgba(120,140,155,0.32);
+      transition: 0.15s ease;
+    }
+
+    .btn-secundario:active {
+      transform: scale(0.97);
+    }
+
+    .rodape-creditos {
+      margin-top: 18px;
+      padding: 18px 10px 0;
+      border-top: 1px solid rgba(120,140,155,0.18);
+      text-align: center;
+      color: #5c7080;
+      font-size: 12px;
+    }
+
+    .rodape-creditos strong {
+      color: #1f5f73;
+    }
+
+    @media (min-width: 760px) {
+      body {
+        padding: 24px;
+        padding-bottom: 110px;
+      }
+
+      .painel-atendimento {
+        max-width: 760px;
+        padding: 28px;
+      }
+
+      h1 {
+        font-size: 40px;
+      }
+
+      .classificacao-grid {
+        grid-template-columns: repeat(5, 1fr);
+      }
+
+      .classificacao-grid .risco:last-child {
+        grid-column: auto;
+      }
+
+      .rodape-acoes {
+        max-width: 760px;
+        margin: 0 auto;
+        left: 50%;
+        transform: translateX(-50%);
+        border-radius: 18px 18px 0 0;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+<div class="painel-atendimento">
+
+  <div class="topo">
+    <img class="logo" src="https://lh3.googleusercontent.com/d/1iaOvysMHBzimz4sVfGqlVvOX5vO2fVKC">
+
+    <div class="usuario-logado">
+      <img id="usuarioFoto" src="">
+      <div>
+        <div id="usuarioNome">---</div>
+        <small id="usuarioFuncao">---</small>
+      </div>
+    </div>
+  </div>
+
+  <div id="btnVoltarTriagem" class="voltar" onclick="voltarTriagem()">
+    ← Voltar para triagem
+  </div>
+
+  <h1>Atendimento de Triagem</h1>
+  <div class="subtitulo">Avaliação inicial do paciente</div>
+
+  <div class="card paciente">
+    <img class="foto-paciente" id="pacienteFoto" src="https://via.placeholder.com/120">
+
+    <div>
+      <div class="nome-paciente" id="pacienteNome">Paciente em atendimento</div>
+
+      <div class="paciente-info-grid">
+        <div><strong>IDE:</strong> <span><?= ide ?></span></div>
+        <div><strong>ID:</strong> <span id="pacienteId">---</span></div>
+        <div><strong>Entrada:</strong> <span id="pacienteEntrada">---</span></div>
+        <div><strong>Tempo:</strong> <span id="tempoEspera">---</span></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="titulo-card">⚕️ Classificação de Risco</div>
+
+    <div class="classificacao-grid">
+      <div class="risco azul" onclick="selecionarRisco('AZUL', this)">Azul</div>
+      <div class="risco verde" onclick="selecionarRisco('VERDE', this)">Verde</div>
+      <div class="risco amarelo" onclick="selecionarRisco('AMARELO', this)">Amarelo</div>
+      <div class="risco laranja" onclick="selecionarRisco('LARANJA', this)">Laranja</div>
+      <div class="risco vermelho" onclick="selecionarRisco('VERMELHO', this)">Vermelho</div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="titulo-card">💬 Queixa Principal</div>
+    <div class="caixa-texto" id="queixaPrincipal">
+      Queixa principal será carregada da planilha.
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="titulo-card">🤖 Sondagem com IA/NPC</div>
+
+    <div id="chatNPC" class="caixa-texto chat-npc">
+      <strong>Paciente:</strong> Doutor... não estou me sentindo bem.
+    </div>
+
+    <textarea 
+      id="perguntaNPC" 
+      placeholder="Digite sua pergunta ao paciente..."></textarea>
+
+    <button class="btn-revelar" onclick="perguntarNPC()">
+      Perguntar ao paciente
+    </button>
+  </div>
+
+  <details class="card">
+    <summary>🩺 Exame Físico</summary>
+
+    <div class="details-conteudo">
+      <div class="exames-grid">
+        <button class="btn-exame" onclick="realizarExameFisico('NEUROLOGICO', this)">Neurológico</button>
+        <button class="btn-exame" onclick="realizarExameFisico('PULMONAR', this)">Pulmonar</button>
+        <button class="btn-exame" onclick="realizarExameFisico('CARDIACO', this)">Cardíaco</button>
+        <button class="btn-exame" onclick="realizarExameFisico('ABDOMINAL', this)">Abdominal</button>
+      </div>
+
+      <div id="contadorExames" class="contador">Exames disponíveis: 1</div>
+
+      <div id="resultadoExame" class="campo-oculto" style="margin-top:14px;">
+        Nenhum exame físico realizado.
+      </div>
+    </div>
+  </details>
+
+  <details class="card">
+    <summary>📝 Anotações da Triagem</summary>
+
+    <div class="details-conteudo">
+      <textarea 
+        id="anotacoesTriagem" 
+        placeholder="Digite aqui as observações do médico..."
+        oninput="verificarLiberacaoEncaminhamento()"></textarea>
+    </div>
+  </details>
+
+  <div class="card">
+    <div class="titulo-card">📁 Histórico de Doenças</div>
+    <div class="caixa-texto" id="historicoDoencas">
+      Histórico será carregado dos atendimentos fechados anteriores.
+    </div>
+  </div>
+
+  <details class="card sinais-vitais">
+    <summary>🫀 Sinais Vitais</summary>
+
+    <div class="details-conteudo">
+      <div id="sinaisOcultos" class="campo-oculto">
+        Dados ocultos até solicitação médica
+      </div>
+
+      <button class="btn-revelar" onclick="revelarSinaisVitais()">
+        Revelar sinais vitais
+      </button>
+    </div>
+  </details>
+
+  <div class="rodape-creditos">
+    Desenvolvido por <strong>Aurora Hash</strong> e <strong>Prof. Tiago Lima</strong>
+  </div>
+
+</div>
+
+<div class="rodape-acoes">
+  <button class="btn-secundario" onclick="voltarTriagem()">Cancelar</button>
+
+  <button 
+    id="btnEncaminhar" 
+    class="btn-principal" 
+    onclick="encaminharPaciente()" 
+    disabled>
+    Encaminhar paciente
+  </button>
+</div>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+    const nome = sessionStorage.getItem("usuarioNome") || "---";
+    const funcao = sessionStorage.getItem("usuarioFuncao") || "---";
+    const foto = sessionStorage.getItem("usuarioFoto") || "https://lh3.googleusercontent.com/d/1jQvrAFm9A3WapSkRDx4o5gPiRnmhKPYP";
+
+    const elNome = document.getElementById("usuarioNome");
+    const elFuncao = document.getElementById("usuarioFuncao");
+    const elFoto = document.getElementById("usuarioFoto");
+
+    if (elNome) elNome.innerText = nome;
+    if (elFuncao) elFuncao.innerText = funcao;
+    if (elFoto) elFoto.src = foto;
+
+    if (typeof carregarDadosAtendimento === "function") {
+      carregarDadosAtendimento();
+    }
+
+    if (typeof verificarLiberacaoEncaminhamento === "function") {
+      verificarLiberacaoEncaminhamento();
+    }
+  });
+</script>
+
+</body>
+</html>
