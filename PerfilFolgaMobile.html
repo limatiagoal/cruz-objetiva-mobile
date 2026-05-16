@@ -1,0 +1,573 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Perfil Profissional Mobile</title>
+
+<style>
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  font-family: Arial, sans-serif;
+  background: linear-gradient(135deg, #dfe7ec, #eef3f6, #d7e1e8);
+  color: #17384a;
+}
+
+.app {
+  width: 100%;
+  max-width: 480px;
+  margin: 0 auto;
+  padding: 14px;
+}
+
+.card {
+  background: rgba(255,255,255,0.94);
+  border: 1px solid rgba(80,110,130,0.18);
+  border-radius: 24px;
+  box-shadow: 0 12px 34px rgba(0,0,0,0.12);
+  padding: 18px;
+  margin-bottom: 14px;
+}
+
+.topo {
+  text-align: center;
+  padding-top: 6px;
+}
+
+.logo {
+  width: 92px;
+  margin-bottom: 4px;
+}
+
+h1 {
+  margin: 4px 0 2px;
+  font-size: 30px;
+  color: #102f43;
+}
+
+.subtitulo {
+  margin: 0;
+  font-size: 13px;
+  color: #607789;
+}
+
+.perfil {
+  text-align: center;
+}
+
+.id {
+  font-weight: 900;
+  color: #00858c;
+  letter-spacing: 1px;
+  font-size: 13px;
+  text-transform: uppercase;
+  margin-bottom: 12px;
+}
+
+.foto {
+  width: 142px;
+  height: 178px;
+  object-fit: cover;
+  border-radius: 18px;
+  box-shadow: 0 8px 22px rgba(0,0,0,0.22);
+  margin-bottom: 14px;
+}
+
+.nome {
+  font-size: 21px;
+  font-weight: 900;
+  color: #18384f;
+  line-height: 1.25;
+}
+
+.funcao {
+  margin-top: 8px;
+  font-size: 15px;
+  color: #00858c;
+  font-weight: 900;
+}
+
+.especialidade {
+  font-size: 14px;
+  color: #4f6574;
+  font-weight: bold;
+}
+
+.status-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  margin-top: 16px;
+  border-top: 1px solid rgba(120,140,155,0.22);
+  padding-top: 14px;
+}
+
+.info-box {
+  background: rgba(240,247,249,0.85);
+  border-radius: 16px;
+  padding: 10px;
+  font-size: 13px;
+}
+
+.info-box strong {
+  display: block;
+  color: #6a7f8f;
+  margin-bottom: 4px;
+}
+
+.info-box span {
+  font-weight: 900;
+  color: #17384a;
+}
+
+.acoes {
+  display: grid;
+  gap: 12px;
+}
+
+.btn {
+  width: 100%;
+  border: none;
+  border-radius: 16px;
+  padding: 16px;
+  font-size: 19px;
+  font-weight: 900;
+  color: white;
+  cursor: pointer;
+  background: linear-gradient(135deg, #11a3a9, #0b6178);
+  box-shadow: 0 8px 18px rgba(31,95,115,0.28);
+  transition: all 0.15s ease;
+}
+
+.btn:hover {
+  transform: translateY(-2px);
+  filter: brightness(1.08);
+}
+
+.btn:active {
+  transform: scale(0.97);
+}
+
+.btn.verde {
+  background: linear-gradient(135deg, #66d99a, #18ad66);
+}
+
+.aviso {
+  background: #e9f7fa;
+  border: 1px solid rgba(80,150,170,0.22);
+  color: #426678;
+  font-size: 13px;
+  line-height: 1.45;
+  border-radius: 18px;
+  padding: 14px;
+}
+
+.aviso strong {
+  display: block;
+  color: #08777c;
+  margin-bottom: 4px;
+}
+
+.grid-atributos {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+.atributo {
+  text-align: center;
+  background: #fff;
+  border: 1px solid rgba(120,140,155,0.20);
+  border-radius: 18px;
+  padding: 14px 8px;
+}
+
+.icone {
+  font-size: 28px;
+}
+
+.label {
+  font-size: 13px;
+  font-weight: 900;
+  color: #607789;
+  margin: 8px 0;
+}
+
+.valor {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 48px;
+  height: 44px;
+  border-radius: 14px;
+  background: #e2f3f4;
+  color: #00858c;
+  font-size: 28px;
+  font-weight: 900;
+}
+
+.resumo {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+
+.resumo-item {
+  background: #fff;
+  border-radius: 16px;
+  border: 1px solid rgba(120,140,155,0.20);
+  padding: 12px;
+  text-align: center;
+}
+
+.resumo-item small {
+  display: block;
+  color: #607789;
+  font-weight: 900;
+  font-size: 12px;
+}
+
+.resumo-item strong {
+  font-size: 25px;
+  color: #17384a;
+}
+
+.titulo-secao {
+  font-size: 18px;
+  font-weight: 900;
+  color: #00858c;
+  margin-bottom: 12px;
+}
+
+.medalhas {
+  display: flex;
+  gap: 10px;
+}
+
+.medalha {
+  width: 52px;
+  height: 52px;
+  border-radius: 16px;
+  border: 1px dashed #9bb9c3;
+  background: #f7fbfc;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 26px;
+}
+
+.xp-card {
+  background: #f7fbfc;
+  border: 1px solid rgba(120,140,155,0.18);
+  border-radius: 16px;
+  padding: 12px;
+  margin-bottom: 10px;
+}
+
+.xp-topo {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  font-size: 13px;
+  font-weight: 900;
+  color: #607789;
+  margin-bottom: 8px;
+}
+
+.xp-desc {
+  font-size: 13px;
+  line-height: 1.4;
+  color: #294253;
+}
+
+.xp-valor {
+  font-size: 22px;
+  font-weight: 900;
+  color: #00858c;
+}
+
+.sair {
+  background: linear-gradient(180deg, #f8fafb, #e7edf1);
+  color: #2b4154;
+  border: 1px solid rgba(120,140,155,0.28);
+}
+
+.carregando {
+  text-align: center;
+  padding: 20px;
+  color: #607789;
+  font-weight: bold;
+}
+</style>
+</head>
+
+<body>
+
+<div class="app">
+
+  <div class="card topo">
+    <img class="logo" src="https://lh3.googleusercontent.com/d/1iaOvysMHBzimz4sVfGqlVvOX5vO2fVKC">
+    <h1>Perfil Profissional</h1>
+    <p class="subtitulo">Resumo médico, atributos, XP e condecorações.</p>
+  </div>
+
+  <div class="card perfil">
+    <div class="id" id="perfilId">ID: ---</div>
+
+    <img 
+      id="perfilFoto" 
+      class="foto" 
+      src="https://lh3.googleusercontent.com/d/1jQvrAFm9A3WapSkRDx4o5gPiRnmhKPYP"
+    >
+
+    <div class="nome" id="perfilNome">---</div>
+    <div class="funcao" id="perfilFuncao">---</div>
+    <div class="especialidade" id="perfilEspecialidade">---</div>
+
+    <div class="status-grid">
+      <div class="info-box">
+        <strong>Status</strong>
+        <span id="perfilStatus">😎 Folga</span>
+      </div>
+      <div class="info-box">
+        <strong>Setor</strong>
+        <span id="perfilSetor">Sem setor</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="card acoes">
+    <button class="btn" onclick="abrirTriagem()">🩺 Triagem</button>
+    <button class="btn" onclick="abrirTriagemGeral()">🏥 Triagem Geral</button>
+    <button class="btn" onclick="abrirCriarNPC()">🧑‍⚕️ Criar NPC</button>
+    <button class="btn verde" onclick="abrirEstudos()">📖 Estudos</button>
+
+    <div class="aviso">
+      <strong>Modo folga ativo</strong>
+      Você pode estudar, revisar seu XP ou criar NPCs para enriquecer o hospital.
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="titulo-secao">Atributos</div>
+
+    <div class="grid-atributos">
+      <div class="atributo">
+        <div class="icone">🏃</div>
+        <div class="label">Agilidade</div>
+        <div class="valor" id="agilidade">0</div>
+      </div>
+
+      <div class="atributo">
+        <div class="icone">💼</div>
+        <div class="label">Experiência</div>
+        <div class="valor" id="experiencia">0</div>
+      </div>
+
+      <div class="atributo">
+        <div class="icone">🧠</div>
+        <div class="label">Inteligência</div>
+        <div class="valor" id="inteligencia">0</div>
+      </div>
+
+      <div class="atributo">
+        <div class="icone">🌿</div>
+        <div class="label">Paciência</div>
+        <div class="valor" id="paciencia">0</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="titulo-secao">Progressão</div>
+
+    <div class="resumo">
+      <div class="resumo-item">
+        <small>Idade no jogo</small>
+        <strong id="idadeJogo">0</strong>
+      </div>
+
+      <div class="resumo-item">
+        <small>Nível</small>
+        <strong id="nivel">1</strong>
+      </div>
+
+      <div class="resumo-item">
+        <small>XP Atual</small>
+        <strong id="xp">0</strong>
+      </div>
+
+      <div class="resumo-item">
+        <small>Total de pontos</small>
+        <strong id="totalPontos">0</strong>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="titulo-secao">🏅 Condecorações</div>
+
+    <div class="medalhas">
+      <div class="medalha">🏅</div>
+      <div class="medalha">🎖️</div>
+      <div class="medalha">⭐</div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="titulo-secao">📊 Contabilidade de XP</div>
+    <div id="historicoXP" class="carregando">Carregando histórico...</div>
+  </div>
+
+  <button class="btn sair" onclick="sairSistema()">Sair</button>
+
+</div>
+
+<script>
+document.addEventListener("DOMContentLoaded", carregarPerfil);
+
+function carregarPerfil() {
+  const login = sessionStorage.getItem("usuarioLogin");
+
+  if (!login) {
+    alert("Login não encontrado. Faça login novamente.");
+    return;
+  }
+
+  google.script.run
+    .withSuccessHandler(preencherPerfil)
+    .withFailureHandler(function(erro) {
+      alert("Erro ao carregar perfil: " + erro.message);
+      console.error(erro);
+    })
+    .getPerfilFolga(login);
+}
+
+function preencherPerfil(resposta) {
+  if (!resposta || resposta.sucesso !== true) {
+    alert((resposta && resposta.mensagem) || "Erro ao carregar perfil.");
+    return;
+  }
+
+  const p = resposta.perfil || {};
+
+  document.getElementById("perfilId").innerText =
+    "ID: " + (p.id || "---");
+
+  document.getElementById("perfilFoto").src =
+    p.foto || "https://lh3.googleusercontent.com/d/1jQvrAFm9A3WapSkRDx4o5gPiRnmhKPYP";
+
+  document.getElementById("perfilNome").innerText =
+    p.nome || "---";
+
+  document.getElementById("perfilFuncao").innerText =
+    p.funcao || "---";
+
+  document.getElementById("perfilEspecialidade").innerText =
+    p.especialidade || "---";
+
+  document.getElementById("perfilStatus").innerText =
+    p.status || "😎 Folga";
+
+  document.getElementById("perfilSetor").innerText =
+    p.setor || "Sem setor";
+
+  document.getElementById("agilidade").innerText =
+    p.agilidade ?? 0;
+
+  document.getElementById("experiencia").innerText =
+    p.experiencia ?? 0;
+
+  document.getElementById("inteligencia").innerText =
+    p.inteligencia ?? 0;
+
+  document.getElementById("paciencia").innerText =
+    p.paciencia ?? 0;
+
+  document.getElementById("idadeJogo").innerText =
+    p.idadeJogo || 0;
+
+  document.getElementById("nivel").innerText =
+    p.nivel || 1;
+
+  document.getElementById("xp").innerText =
+    p.xp ?? 0;
+
+  document.getElementById("totalPontos").innerText =
+    p.totalPontos ?? 0;
+
+  montarHistoricoXP(p.historicoXP || []);
+}
+
+function montarHistoricoXP(historico) {
+  const container = document.getElementById("historicoXP");
+  container.innerHTML = "";
+
+  if (!historico.length) {
+    container.innerHTML = `
+      <div class="xp-card">
+        <div class="xp-desc">Nenhum lançamento de XP encontrado.</div>
+      </div>
+    `;
+    return;
+  }
+
+  historico.forEach(item => {
+    const div = document.createElement("div");
+    div.className = "xp-card";
+
+    div.innerHTML = `
+      <div class="xp-topo">
+        <span>${item.data || ""}</span>
+        <span class="xp-valor">${item.xp || 0}</span>
+      </div>
+      <div class="xp-desc">
+        <strong>${item.categoria || ""}</strong><br>
+        ${item.observacao || ""}
+      </div>
+    `;
+
+    container.appendChild(div);
+  });
+}
+
+function abrirTriagem() {
+  google.script.run
+    .withSuccessHandler(function(html) {
+      document.open();
+      document.write(html);
+      document.close();
+    })
+    .carregarTelaTriagem();
+}
+
+function abrirTriagemGeral() {
+  google.script.run
+    .withSuccessHandler(function(html) {
+      document.open();
+      document.write(html);
+      document.close();
+    })
+    .carregarTelaTriagem();
+}
+
+function abrirCriarNPC() {
+  alert("Tela Criar NPC ainda será conectada.");
+}
+
+function abrirEstudos() {
+  alert("Tela Estudos ainda será conectada.");
+}
+
+function sairSistema() {
+  location.reload();
+}
+</script>
+
+</body>
+</html>
